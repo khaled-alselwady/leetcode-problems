@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 public class Node
 {
-    public int Value;
+    public byte Value;
     public Node Next;
 
-    public Node(int Value = 0, Node Next = null)
+    public Node(byte Value = 0, Node Next = null)
     {
         this.Value = Value;
         this.Next = Next;
@@ -19,10 +19,10 @@ public class Solution
     {
         List<Node> L1 = new List<Node>
         {
+           new Node { Value = 0, Next = null },
+           new Node { Value = 0, Next = null },
            new Node { Value = 9, Next = null },
-           new Node { Value = 9, Next = null },
-           new Node { Value = 9, Next = null },
-           new Node { Value = 9, Next = null },
+           new Node { Value = 0, Next = null },
            new Node { Value = 9, Next = null },
            new Node { Value = 9, Next = null },
            new Node { Value = 9, Next = null }
@@ -73,6 +73,14 @@ public class Solution
         Console.Write("]");
     }
 
+    public static void RemoveLeadingZero(List<Node> lst)
+    {
+        while (lst[0].Value == 0 && lst.Count > 1)
+        {
+            lst.RemoveAt(0);
+        }
+    }
+
     public static List<Node> AddTwoNumbers(List<Node> lst1, List<Node> lst2)
     {
         if (lst1 == null || lst2 == null)
@@ -82,11 +90,9 @@ public class Solution
             (lst2.Count > 100 || lst2.Count < 1))
             return null;
 
-        if (lst1[0].Value == 0 && lst1.Count > 1)
-            lst1.RemoveAt(0);
+        RemoveLeadingZero(lst1);
 
-        if (lst2[0].Value == 0 && lst2.Count > 1)
-            lst2.RemoveAt(0);
+        RemoveLeadingZero(lst2);
 
         List<Node> lst3 = new List<Node>();
 
@@ -103,13 +109,13 @@ public class Solution
 
         for (int i = 0; i < lst1.Count || Remainder != 0; i++)
         {
-            int Value1 = (i < lst1.Count) ? lst1[i].Value : 0;
-            int Value2 = (i < lst2.Count) ? lst2[i].Value : 0;
+            byte Value1 = (i < lst1.Count) ? lst1[i].Value : (byte)0;
+            byte Value2 = (i < lst2.Count) ? lst2[i].Value : (byte)0;
 
-            int Sum = Value1 + Value2 + Remainder;
+            byte Sum = (byte)(Value1 + Value2 + Remainder);
             Remainder = (byte)(Sum / 10);
 
-            NodeSum = new Node(Sum % 10);
+            NodeSum = new Node((byte)(Sum % 10));
 
             if (i != 0)
             {
