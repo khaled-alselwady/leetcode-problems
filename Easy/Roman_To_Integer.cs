@@ -5,12 +5,12 @@ public class Solution
 {
     public static void Main(string[] args)
     {
-        Console.WriteLine(RomanToInt("CDXLIV"));
+        Console.WriteLine(RomanToInt_Method1("CDXLIV"));
 
         Console.ReadKey();
     }
 
-    public static int RomanToInt(string s)
+    public static int RomanToInt_Method1(string s)
     {
         if (s == null || s.Length > 15)
             return 0;
@@ -36,6 +36,41 @@ public class Solution
             {
                 Sum += (short)(RomanKeyValue[s[i + 1]] - RomanKeyValue[s[i]]);
                 i++;
+            }
+            else
+            {
+                Sum += RomanKeyValue[s[i]];
+            }
+        }
+
+        return Sum;
+    }
+
+    public static int RomanToInt_Method2(string s)
+    {
+        if (s == null || s.Length > 15)
+            return 0;
+
+        short Sum = 0;
+        Dictionary<char, short> RomanKeyValue = new Dictionary<char, short>
+        {
+            {'I',1 },
+            { 'V',5},
+            { 'X',10},
+            { 'L',50},
+            { 'C',100},
+            { 'D',500},
+            { 'M',1000}
+        };
+
+        for (int i = (s.Length - 1); i >= 0; i--)
+        {
+            if (_IsInvalidSubtractivePair(s, i))
+                return 0;
+
+            if ((4 * RomanKeyValue[s[i]]) < Sum)
+            {
+                Sum -= RomanKeyValue[s[i]];
             }
             else
             {
