@@ -68,6 +68,9 @@ public class Solution
     #region Method 2
     private static int _GetMajorityElement(int[] nums)
     {
+        if (nums.Length == 1)
+            return nums[0];
+
         int Majority = 0;
         int Result = 0;
 
