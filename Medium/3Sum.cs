@@ -5,7 +5,7 @@ public class Solution
 {
     public static void Main(string[] args)
     {
-        IList<IList<int>> lstResult = ThreeSum4(new int[] { -1, 0, 1, 2, -1, -4, -2, -3, 3, 0, 4 });
+        IList<IList<int>> lstResult = ThreeSum(new int[] { -1, 0, 1, 2, -1, -4, -2, -3, 3, 0, 4 });
 
         foreach (IList<int> lst in lstResult)
         {
@@ -20,7 +20,7 @@ public class Solution
         Console.ReadKey();
     }
 
-    public static IList<IList<int>> ThreeSum4(int[] nums)
+    public static IList<IList<int>> ThreeSum(int[] nums)
     {
         if (nums == null || nums.Length < 3)
             return new List<IList<int>>();
@@ -34,9 +34,9 @@ public class Solution
             if (i > 0 && nums[i] == nums[i - 1])
                 continue; // Skip duplicates
 
-            IList<IList<int>> TwoSum = TwoSum2(nums, i + 1, -nums[i]);
+            IList<IList<int>> TwoSumResult = TwoSum(nums, i + 1, -nums[i]);
 
-            foreach (var lst in TwoSum)
+            foreach (var lst in TwoSumResult)
             {
                 lst.Insert(0, nums[i]);
                 Result.Add(lst);
@@ -46,7 +46,7 @@ public class Solution
         return Result;
     }
 
-    public static IList<IList<int>> TwoSum2(int[] nums, int Start, int Target)
+    public static IList<IList<int>> TwoSum(int[] nums, int Start, int Target)
     {
         IList<IList<int>> Result = new List<IList<int>>();
         int End = nums.Length - 1;
